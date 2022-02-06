@@ -8,17 +8,15 @@ import cartItems from "./cart-items";
 const initialStore = {
     cart: cartItems,
     // amount of items
-    amount: 0,
+    amount: 5,
     // Total amount
-    total: 0
+    total: 25
 }
 
 // Declaring the reducer initially
 // reducer takes two arguments, current state and an action.
 // Default state value for first call, when state is undefined.
 const reducer = (state = initialStore, action) => {
-    console.log("Hi from the reducer");
-    console.log({ state, action });
 
     if (action.type === a.INCREASE) {
         console.log("Checking action are we?");

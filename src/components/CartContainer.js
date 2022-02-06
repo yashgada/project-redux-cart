@@ -1,8 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import CartItem from "./CartItem";
-const CartContainer = ({ cart = [] }, store) => {
+
+const CartContainer = ({ cart = [], total }) => {
   // gave a default value to cart, in case it is undefined for any reason
-  console.log(store);
+
+  // Check if cart is empty
   if (cart.length === 0) {
     return (
       <section className="cart">
@@ -35,7 +38,7 @@ const CartContainer = ({ cart = [] }, store) => {
         <div className="cart-total">
           <h4>
             {/* Place-holder, 0 for now */}
-            total <span>$0.00</span>
+            total <span>₹{total}</span>
           </h4>
         </div>
         <button className="btn clear-btn">clear cart</button>
@@ -44,4 +47,9 @@ const CartContainer = ({ cart = [] }, store) => {
   );
 };
 
-export default CartContainer;
+const mapStateToProps = (state) => {
+  const { amount, total } = state
+  return { amount, total }
+}
+
+export default connect(mapStateToProps)(CartContainer);
