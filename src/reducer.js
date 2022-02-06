@@ -44,13 +44,22 @@ const reducer = (state = initialStore, action) => {
         return { ...state, amount: state.amount - 1, cart: newCart }
     }
     if (action.type === a.REMOVE) {
-        console.log("remove item" + action.payload.id);
+        // console.log("remove item" + action.payload.id);
         const newCart = state.cart.filter((product) => product.id !== action.payload.id)
         return { ...state, cart: newCart }
     }
     if (action.type === a.CLEAR_ALL) {
         console.log(state);
         return { ...state, cart: [] }
+    }
+    if (action.type === a.CALC_AMOUNT) {
+        const { total, amount } = state.cart.reduce((acc, item) => {
+            let { amount, total } = acc
+            total += item.amount * item.price
+            amount += item.amount
+            return { amount, total }
+        }, { amount: 0, total: 0 })
+        return { ...state, amount: amount, total: total }
     }
 
     // always at least return the original state, to not break functionality

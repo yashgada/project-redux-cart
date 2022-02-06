@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import CartItem from "./CartItem";
 import * as a from "../actions"
@@ -6,6 +6,12 @@ import * as a from "../actions"
 
 const CartContainer = ({ cart = [], total, dispatch }) => {
   // gave a default value to cart, in case it is undefined for any reason
+
+  useEffect(() => {
+    dispatch({ type: a.CALC_AMOUNT });
+    console.log("Amount Calculated");
+  }, [cart, dispatch]);
+
 
   // Check if cart is empty
   if (cart.length === 0) {
@@ -40,7 +46,7 @@ const CartContainer = ({ cart = [], total, dispatch }) => {
         <div className="cart-total">
           <h4>
             {/* Place-holder, 0 for now */}
-            total <span>₹{total}</span>
+            total <span>₹{total * 75}</span>
           </h4>
         </div>
         <button className="btn clear-btn" onClick={() => dispatch({ type: a.CLEAR_ALL })} > clear cart</button>
