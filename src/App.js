@@ -5,8 +5,6 @@ import CartContainer from "./components/CartContainer";
 
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-// items
-import cartItems from "./cart-items";
 // redux stuff
 import reducer from "./reducer";
 
@@ -28,7 +26,7 @@ function App() {
   return (
     <Provider store={store}>
       {/* Passing state down to Navbar to test connections */}
-      <Navbar cart={store.getState().cart} />
+      <Navbar />
       {/* passing down cart items for now, a default value for what the card should be */}
       <CartContainer />
     </Provider>

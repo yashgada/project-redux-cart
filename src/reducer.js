@@ -8,7 +8,7 @@ import cartItems from "./cart-items";
 const initialStore = {
     cart: cartItems,
     // amount of items
-    amount: 5,
+    amount: 3,
     // Total amount
     total: 25
 }
@@ -19,15 +19,29 @@ const initialStore = {
 const reducer = (state = initialStore, action) => {
 
     if (action.type === a.INCREASE) {
-        console.log("Increase");
-
+        // console.log("Increase");
+        const newCart = state.cart.map((item) => {
+            if (item.id === action.payload.id) {
+                return { ...item, amount: item.amount += 1 }
+            }
+            return item
+        })
         // setting count to whatever it is +1
         // This is the standard way to return state, to respect the immutability principle and also make sure the rest of the object is also made back
-        return { ...state, count: state.count + 1 }
+        return { ...state, cart: newCart, amount: state.amount + 1 }
     }
     if (action.type === a.DECREASE) {
         console.log("Decrease");
-        return { ...state, count: state.count - 1 }
+        const newCart = state.cart.map((item) => {
+            if (item.id === action.payload.id) {
+                return { ...item, amount: item.amount -= 1 }
+            }
+            return item
+        })
+        // setting count to whatever it is +1
+        // This is the standard way to return state, to respect the immutability principle and also make sure the rest of the object is also made back
+        // return { ...state, cart: newCart }
+        return { ...state, amount: state.amount - 1, cart: newCart }
     }
     if (action.type === a.REMOVE) {
         console.log("remove item" + action.payload.id);
