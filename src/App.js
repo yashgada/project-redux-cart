@@ -30,7 +30,7 @@ function App() {
       {/* Passing state down to Navbar to test connections */}
       <Navbar cart={store.getState().cart} />
       {/* passing down cart items for now, a default value for what the card should be */}
-      <CartContainer cart={cartItems} />
+      <CartContainer />
     </Provider>
   );
 }

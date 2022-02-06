@@ -1,8 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import CartItem from "./CartItem";
+import * as a from "../actions"
+// import { CLEAR_ALL } from "../actions"
 
-const CartContainer = ({ cart = [], total }) => {
+const CartContainer = ({ cart = [], total, dispatch }) => {
   // gave a default value to cart, in case it is undefined for any reason
 
   // Check if cart is empty
@@ -41,15 +43,15 @@ const CartContainer = ({ cart = [], total }) => {
             total <span>₹{total}</span>
           </h4>
         </div>
-        <button className="btn clear-btn">clear cart</button>
+        <button className="btn clear-btn" onClick={() => dispatch({ type: a.CLEAR_ALL })} > clear cart</button>
       </footer>
-    </section>
+    </section >
   );
 };
 
 const mapStateToProps = (state) => {
-  const { amount, total } = state
-  return { amount, total }
+  const { amount, total, cart } = state
+  return { amount, total, cart }
 }
 
 export default connect(mapStateToProps)(CartContainer);
